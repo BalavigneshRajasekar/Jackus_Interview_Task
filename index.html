@@ -23,7 +23,7 @@
         </select>
         <button id="add-employee">Add Employee</button>
       </div>
-      <div class="Form">
+      <div class="hidden" id="Form">
         <form id="employee-form">
           <input type="text" id="Fname" placeholder="First Name" required />
           <input type="text" id="Lname" placeholder="Last Name" required />
@@ -32,8 +32,8 @@
             <select id="department" required>
               <option value="" disabled selected>Select Department</option>
               <option value="HR">HR</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Marketing">Marketing</option>
+              <option value="IT">IT</option>
+              <option value="Accounts">Accounts</option>
               <option value="Sales">Sales</option>
             </select>
           </div>
@@ -47,6 +47,7 @@
           <button type="submit">Submit</button>
         </form>
       </div>
+      <div id="employeeList"></div>
     </main>
   </body>
 </html>
