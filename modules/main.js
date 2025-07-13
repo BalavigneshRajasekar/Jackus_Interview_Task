@@ -24,6 +24,7 @@ const employeeData = [
     Role: "senior",
   },
 ];
+
 //Form show and hide-----------------
 const showForm = () => {
   console.log("Button clicked");
@@ -52,14 +53,20 @@ const employeeList = () => {
             <button class="edit-button" value="${employee.id}">Edit</button>`;
     employeeListDiv.appendChild(employeeItem);
   });
+  // 👉 Rebind edit buttons after rendering new DOM
+  handleEditButtonClick();
 };
 
 employeeList();
 //---------------------------------------------------------------------------
-
+let submitButton = document.getElementById("submit");
 //Edit Functionality -------------------------------------------------
 const editEmployee = (id) => {
   const employee = employeeData.find((emp) => emp.id === id);
+
+  submitButton.value = id; // Set the value of the submit button to the employee id
+  console.log(id);
+
   if (employee) {
     document.getElementById("Fname").value = employee.FirstName;
     document.getElementById("Lname").value = employee.LastName;
@@ -71,19 +78,52 @@ const editEmployee = (id) => {
     showForm();
   }
 };
-const editButtons = document.querySelectorAll(".edit-button");
-const handleEditButtonClick = () => {
+
+function handleEditButtonClick() {
+  const editButtons = document.querySelectorAll(".edit-button");
   editButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
-      console.log(event);
-
       console.log("Edit button clicked");
       const id = parseInt(event.target.value, 10); // read id from button value
       editEmployee(id); // call the edit function
     });
   });
-};
+}
 
-console.log("Edit buttons:", editButtons);
+//Update edited data----------
 
-handleEditButtonClick();
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault(); // Prevent form submission
+  console.log(submitButton.value);
+
+  const firstName = document.getElementById("Fname").value;
+  const lastName = document.getElementById("Lname").value;
+  const email = document.getElementById("email").value;
+  const department = document.getElementById("department").value;
+  const role = document.getElementById("role").value;
+
+  // Find the employee to update
+  const employeeToUpdate = employeeData.find(
+    (emp) => emp.id == submitButton.value
+  );
+
+  console.log(employeeToUpdate);
+
+  if (employeeToUpdate) {
+    employeeToUpdate.FirstName = firstName;
+    employeeToUpdate.LastName = lastName;
+    employeeToUpdate.Email = email;
+    employeeToUpdate.Department = department;
+    employeeToUpdate.Role = role;
+
+    // Re-render the employee list
+    employeeList();
+
+    // Hide the form
+    showForm();
+  } else {
+    console.error("Employee not found");
+  }
+
+  //Delete Functionality
+});
