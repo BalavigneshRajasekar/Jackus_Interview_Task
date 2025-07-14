@@ -49,7 +49,7 @@ const employeeList = () => {
            <h3>Email: ${employee.Email}</h3>
            <h4> Department: ${employee.Department}</h4>
             <h4>Role: ${employee.Role}</h4>
-            <button class="delete-button">Delete</button>
+            <button class="delete-button" value=${employee.id}>Delete</button>
             <button class="edit-button" value="${employee.id}">Edit</button>`;
     employeeListDiv.appendChild(employeeItem);
   });
@@ -124,6 +124,27 @@ submitButton.addEventListener("click", (event) => {
   } else {
     console.error("Employee not found");
   }
-
-  //Delete Functionality
 });
+//Delete Functionality
+
+const deleteEmployee = (id) => {
+  const employeeIndex = employeeData.findIndex((emp) => emp.id === id);
+  if (employeeIndex !== -1) {
+    employeeData.splice(employeeIndex, 1); // Remove the employee from the array
+    employeeList(); // Re-render the employee list
+    handleDeleteButtonClick(); // Rebind delete buttons
+  } else {
+    console.error("Employee not found");
+  }
+};
+function handleDeleteButtonClick() {
+  const deleteButtons = document.querySelectorAll(".delete-button");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      console.log("Delete button clicked");
+      const id = parseInt(event.target.value, 10); // read id from button value
+      deleteEmployee(id); // call the edit function
+    });
+  });
+}
+handleDeleteButtonClick();
