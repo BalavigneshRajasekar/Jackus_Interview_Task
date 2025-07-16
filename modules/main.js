@@ -145,6 +145,8 @@ function handleDeleteButtonClick() {
       const id = parseInt(event.target.value, 10); // read id from button value
       deleteEmployee(id); // call the edit function
     });
+    console.log("Delete button bound");
   });
 }
+//First time binding delete buttons
 handleDeleteButtonClick();
