@@ -55,8 +55,10 @@ const employeeList = () => {
   });
   // 👉 Rebind edit buttons after rendering new DOM
   handleEditButtonClick();
+  handleDeleteButtonClick();
 };
 
+// Initial rendering of employee list
 employeeList();
 //---------------------------------------------------------------------------
 let submitButton = document.getElementById("submit");
@@ -65,7 +67,6 @@ const editEmployee = (id) => {
   const employee = employeeData.find((emp) => emp.id === id);
 
   submitButton.value = id; // Set the value of the submit button to the employee id
-  console.log(id);
 
   if (employee) {
     document.getElementById("Fname").value = employee.FirstName;
