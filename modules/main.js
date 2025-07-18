@@ -84,7 +84,6 @@ function handleEditButtonClick() {
   const editButtons = document.querySelectorAll(".edit-button");
   editButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
-      console.log("Edit button clicked");
       const id = parseInt(event.target.value, 10); // read id from button value
       editEmployee(id); // call the edit function
     });
@@ -142,7 +141,6 @@ function handleDeleteButtonClick() {
   const deleteButtons = document.querySelectorAll(".delete-button");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
-      console.log("Delete button clicked");
       const id = parseInt(event.target.value, 10); // read id from button value
       deleteEmployee(id); // call the edit function
     });
